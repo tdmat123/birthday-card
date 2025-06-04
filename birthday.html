@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Love 💖</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom right, #ffe6eb, #ffd5e0);
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Couple cartoon background */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('https://i.pinimg.com/originals/3e/43/94/3e439442b66267d1e327291243a7a408.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.08;
+      z-index: 0;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background-color: #ff5e8e;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: floatHearts 8s linear infinite;
+      opacity: 0.8;
+      clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 85%, 15% 100%, 0 35%);
+      z-index: 1;
+    }
+
+    @keyframes floatHearts {
+      0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateX(calc(-50% + 100px)) translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+
+    .envelope-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+      z-index: 3;
+    }
+
+    .envelope {
+      width: 300px;
+      height: 200px;
+      background: linear-gradient(145deg, #ff8fb2, #ff709a);
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      overflow: visible;
+      z-index: 4;
+      transition: transform 0.5s ease;
+    }
+
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    .flap {
+      width: 0;
+      height: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-bottom: 100px solid #ff5e8e;
+      position: absolute;
+      top: -100px;
+      left: 0;
+      z-index: 5;
+      transform-origin: top;
+      transition: transform 0.6s ease;
+    }
+
+    .letter {
+      width: 280px;
+      max-height: 350px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+      position: absolute;
+      top: 0;
+      left: 310px;
+      opacity: 0;
+      overflow-y: auto;
+      transform: translateX(-20px);
+      transition: transform 1s ease, opacity 1s ease;
+      z-index: 1;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope.open .letter {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #e91e63;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    /* Prompt */
+    .question-box {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff0f5;
+      border: 2px solid #ff99b3;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 10;
+      animation: fadeIn 1s ease;
+    }
+
+    .question-box button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating Hearts -->
+<script>
+  for (let i = 0; i < 25; i++) {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+    heart.style.width = heart.style.height = (15 + Math.random() * 15) + 'px';
+    document.body.appendChild(heart);
+  }
+</script>
+
+<div class="envelope-wrapper">
+  <div class="envelope" onclick="openEnvelope(this)">
+    <div class="flap"></div>
+    <div class="letter" onscroll="checkScroll(this)">
+      <h2>To My Love 💖</h2>
+      <p>
+        Hey Baby, 💌<br><br>
+        On this special day, I just wanted to say…<br>
+        You are my favorite notification,<br>
+        My favorite hello and my hardest goodbye.<br><br>
+        You're not just the main function of my life—<br>
+        You're the love of my heart. ❤️<br><br>
+        I love you more than Goku loves food… or maybe even Chi-Chi 😘<br>
+        Wishing you laughter, love, and lots of cake today 🎂🎈<br><br>
+        Yours in every timeline,<br>
+        Your Avani😘🌌
+      </p>
+      <img src="https://wallpapers.com/images/hd/goku-and-chichi-1jmg0b6b91mzixa0.jpg" alt=\"Goku and Chi-Chi Hug\">
+    </div>
+  </div>
+</div>
+
+<!-- Prompt Box -->
+<div class="question-box" id="questionBox">
+  <p>Will you allow me to stay in your life to make you happy? 💘</p>
+  <button onclick="alert('Yay! You made me the happiest ❤️')">Yes</button>
+</div>
+
+<script>
+  function openEnvelope(el) {
+    el.classList.add('open');
+  }
+
+  function checkScroll(letterEl) {
+    const box = document.getElementById('questionBox');
+    if (letterEl.scrollTop + letterEl.clientHeight >= letterEl.scrollHeight - 5) {
+      box.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>
