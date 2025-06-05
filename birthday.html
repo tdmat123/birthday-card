@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Love 💖</title>
+  <style>
+    body {
+      margin: 0;
+      background: url('https://www.transparenttextures.com/patterns/vintage-wallpaper.png');
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background-size: cover;
+    }
+
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {transform: translateY(100vh) rotate(45deg); opacity: 1;}
+      100% {transform: translateY(-10vh) rotate(45deg); opacity: 0;}
+    }
+
+    .envelope-container {
+      position: relative;
+      z-index: 1;
+      animation: bounce 3s ease-in-out infinite;
+      perspective: 1000px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .envelope {
+      width: 300px;
+      height: 220px;
+      background-color: #ffc0cb;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transform-style: preserve-3d;
+      overflow: visible;
+      z-index: 2;
+    }
+
+    .flap {
+      width: 100%;
+      height: 110px;
+      background-color: #ffb6c1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: top;
+      transition: transform 0.8s ease;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      z-index: 4;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(-160deg);
+    }
+
+    .letter {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 320px;
+      height: 280px;
+      background: url('https://www.transparenttextures.com/patterns/old-mathematics.png'), #f9f1dc;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      font-family: 'Courier New', monospace;
+      color: #4b2e0f;
+      overflow-y: auto;
+      max-height: 280px;
+      transform: translateX(0);
+      transition: transform 1.2s ease, opacity 1.2s ease;
+      opacity: 0;
+      z-index: 3;
+    }
+
+    .envelope.open .letter {
+      transform: translateX(20px);
+      opacity: 1;
+    }
+
+    .heart-icon {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      color: red;
+      z-index: 5;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .prompt-box {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff0f5;
+      padding: 20px;
+      border: 2px solid #fca3b7;
+      border-radius: 12px;
+      display: none;
+      z-index: 10;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .prompt-box button {
+      padding: 10px 20px;
+      margin: 10px;
+      background: #f87171;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .prompt-box button:hover {
+      background: #e4576a;
+    }
+
+    .couple-bg {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 100px;
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    .teddy {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      z-index: 10;
+      animation: moveTeddy 3s ease-in-out infinite;
+    }
+
+    @keyframes moveTeddy {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(10px); }
+    }
+
+    .teddy-caption {
+      position: absolute;
+      top: 75px;
+      left: 10px;
+      width: 80px;
+      font-size: 10px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      padding: 5px;
+      color: #d6336c;
+      font-weight: bold;
+    }
+
+    .fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 100;
+    }
+
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: gold;
+      border-radius: 50%;
+      animation: explode 800ms ease-out forwards;
+    }
+
+    @keyframes explode {
+      to {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-love.mp3" preload="auto"></audio>
+
+<div class="hearts" id="hearts"></div>
+<img src="https://i.pinimg.com/originals/e3/91/bc/e391bc0d4d55467e409d337bcd029d45.png" alt="Couple" class="couple-bg">
+
+<div class="teddy">
+  <img src="https://pngimg.com/uploads/teddy_bear/teddy_bear_PNG105.png" alt="Teddy Bear">
+  <div class="teddy-caption">Click on the envelope 💌</div>
+</div>
+
+<div class="envelope-container">
+  <div class="envelope" id="envelope" onclick="toggleEnvelope()">
+    <div class="flap" id="flap"></div>
+    <div class="heart-icon">❤</div>
+    <div class="letter" id="letter">
+      <h2>To My Love 💖</h2>
+      <p>
+        Hey Baby, 💌<br><br>
+        On this special day, I just wanted to say…<br>
+        You are my favorite notification,<br>
+        My favorite hello and my hardest goodbye.<br><br>
+        You're not just the main function of my life—<br>
+        You're the love of my heart. ❤️<br><br>
+        I love you more than Goku loves food… or maybe even Chi-Chi 😘<br>
+        Wishing you laughter, love, and lots of cake today 🎂🎈<br><br>
+        Yours in every timeline,<br>
+        Your Avani😘🌌
+      </p>
+      <img src="https://wallpapers.com/images/hd/goku-and-chichi-1jmg0b6b91mzixa0.jpg" alt="Goku and Chi-Chi Hug">
+    </div>
+  </div>
+</div>
+
+<div class="prompt-box" id="promptBox">
+  <p>Will you allow me to stay in your life to make you happy?</p>
+  <button onclick="answerYes()">Yes</button>
+  <button onclick="answerNo()">No</button>
+</div>
+
+<div class="fireworks" id="fireworks"></div>
+
+<script>
+  let isOpen = false;
+
+  function toggleEnvelope() {
+    const envelope = document.getElementById('envelope');
+    envelope.classList.toggle('open');
+    isOpen = !isOpen;
+    const prompt = document.getElementById('promptBox');
+
+    if (isOpen) {
+      setTimeout(() => {
+        prompt.style.display = 'block';
+      }, 2200);
+      document.getElementById('bgMusic').play();
+    } else {
+      prompt.style.display = 'none';
+    }
+  }
+
+  function answerYes() {
+    document.getElementById('promptBox').innerHTML = '<p>Yay! You made me the happiest person ever! 😍</p>';
+    launchFireworks();
+  }
+
+  function answerNo() {
+    document.getElementById('promptBox').innerHTML = `
+      <p>Will you allow me to stay in your life to make you happy?</p>
+      <button onclick="answerYes()">Yes</button>
+      <button onclick="answerNo()">No</button>
+    `;
+  }
+
+  function launchFireworks() {
+    const fireworks = document.getElementById('fireworks');
+    for (let i = 0; i < 25; i++) {
+      const fw = document.createElement('div');
+      fw.className = 'firework';
+      fw.style.left = Math.random() * 100 + 'vw';
+      fw.style.top = Math.random() * 100 + 'vh';
+      fw.style.setProperty('--x', `${Math.random() * 200 - 100}px`);
+      fw.style.setProperty('--y', `${Math.random() * 200 - 100}px`);
+      fireworks.appendChild(fw);
+      setTimeout(() => fireworks.removeChild(fw), 1000);
+    }
+  }
+
+  for (let i = 0; i < 30; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.animationDelay = Math.random() * 5 + 's';
+    heart.style.top = Math.random() * 100 + '%';
+    document.getElementById('hearts').appendChild(heart);
+  }
+</script>
+
+</body>
+</html>
